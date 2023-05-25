@@ -1,0 +1,45 @@
+<mxfile modified="2023-05-25T03:56:23.369Z" host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 OPR/98.0.0.0 (Edition std-1)" etag="18PHQlWo34Wx591DPVvB" version="21.3.3" type="github">
+  <diagram id="f106602c-feb2-e66a-4537-3a34d633f6aa" name="Page-1">
+    <mxGraphModel dx="1151" dy="1099" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="711" value="" style="rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;strokeColor=none;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#E1F5FE;" parent="1" vertex="1">
+          <mxGeometry x="460" y="460" width="360" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Ua8vcs_fdP_u-r1Fz-Kt-719" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="705" target="699">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="705" value="Generate &lt;br&gt;ChatGPT&lt;br style=&quot;font-size: 15px;&quot;&gt;Prompt&lt;br&gt;Inputs" style="rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;strokeColor=none;fontSize=15;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#FFF8E1;" parent="1" vertex="1">
+          <mxGeometry x="170" y="47.5" width="90" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Ua8vcs_fdP_u-r1Fz-Kt-725" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="706" target="699">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="92.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="706" value="Run GPT Prompt&amp;nbsp;&lt;br&gt;Inputs, Output&lt;br&gt;Midjourney Prompt&lt;br&gt;inputs" style="rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;strokeColor=none;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#FFF8E1;" parent="1" vertex="1">
+          <mxGeometry x="400" y="42.5" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="707" value="" style="rounded=1;absoluteArcSize=1;arcSize=2;html=1;strokeColor=none;gradientColor=none;shadow=0;dashed=0;strokeColor=none;fontSize=12;fontColor=#9E9E9E;align=left;verticalAlign=top;spacing=10;spacingTop=-4;fillColor=#F1F8E9;" parent="1" vertex="1">
+          <mxGeometry x="130" y="620" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="697" value="" style="strokeColor=#dddddd;fillColor=#ffffff;shadow=1;strokeWidth=1;rounded=1;absoluteArcSize=1;arcSize=2;fontSize=10;fontColor=#9E9E9E;align=center;html=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="690" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Ua8vcs_fdP_u-r1Fz-Kt-724" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="699" target="706">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="699" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Stored &lt;br&gt;Prompt &lt;br&gt;Database&lt;br&gt;&lt;br&gt;(MJ, CGPT)&lt;br&gt;&lt;/font&gt;" style="strokeColor=#dddddd;fillColor=#ffffff;shadow=1;strokeWidth=1;rounded=1;absoluteArcSize=1;arcSize=2;fontSize=10;fontColor=#9E9E9E;align=center;html=1;" parent="1" vertex="1">
+          <mxGeometry x="310" y="180" width="110" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="701" value="" style="strokeColor=#dddddd;fillColor=#ffffff;shadow=1;strokeWidth=1;rounded=1;absoluteArcSize=1;arcSize=2;fontSize=10;fontColor=#9E9E9E;align=center;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="320" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="703" value="" style="strokeColor=#dddddd;fillColor=#ffffff;shadow=1;strokeWidth=1;rounded=1;absoluteArcSize=1;arcSize=2;fontSize=10;fontColor=#9E9E9E;align=center;html=1;" parent="1" vertex="1">
+          <mxGeometry x="820" y="650" width="150" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
