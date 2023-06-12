@@ -1,5 +1,6 @@
 import openai
-from lib.config import StickerMakerAPIKey
+from Modules.keys import StickerMakerAPIKey
+from src.Modules.Content import material, shape, medium, color
 
 # Set up your OpenAI API key
 openai.api_key = StickerMakerAPIKey
@@ -28,10 +29,10 @@ messages = [
 
 total_session = 0
 
-while True:
-    content = input("User: ")
+while total_session < 5000:
+    content = "Selected material: {} Selected shapes: {} Selected colors: {} Selected medium: {}".format(material(),shape(),color(),medium())
     messages.append({"role": "user", "content": content})
-
+    print(content)
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=messages
