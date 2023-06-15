@@ -1,4 +1,4 @@
-Prompt_engineer = '''
+PROMPT_ENGINEER = '''
 I want you to act as a prompt engineer. You will help me write prompts for an ai art generator called Midjourney.
 
 I will provide you with short content ideas and your job is to elaborate these into full, explicit, coherent prompts.

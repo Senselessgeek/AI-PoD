@@ -1,11 +1,11 @@
 import openai
-import Modules.Functions as F
+import src.Modules.Functions as F
 
 
 
 # Start a loop to feed in random material, shapes, colors, and mediums as prompts.
-def call_gpt(API) :
-    openai.api_key = API
+def call_gpt(APIKEY):
+    openai.api_key = APIKEY
     messages = F.MJ_message()[0]
 
     #call openai to create a response4
