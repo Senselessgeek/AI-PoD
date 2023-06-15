@@ -67,14 +67,17 @@ def download_upscaled_images(page, prompt_text):
                     response = re.sub(r'[^a-zA-Z0-9\s]', '', prompt_text)
                     # Replace all commas and spaces with underscores.
                     response = response.replace(',', '_').replace(' ', '_')
-                    # Get first 180 characters of response.  Windows wont save if the file name is too long.
-                    response = response[:180]
+
+                    # If having issue saving the file geting "FileNotFoundError: [Errno 2] No such file or directory:"
+                    # see this article on Windows Long File Paths.
+                    # https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry
+                    response = response[:200]
                     r = requests.get(url, stream=True)
 
                     # Generate a unique filename using a UUID
                     filename = f"{response}_{uuid.uuid1()}.png"
                     curpath = os.path.abspath(os.curdir)
-                    filepath = os.path.join(curpath, "../images", filename)
+                    filepath = os.path.join(curpath, "../static/images", filename)
 
                     with open(filepath, "wb") as outfile:
                         outfile.write(r.content)

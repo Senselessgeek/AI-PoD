@@ -4,16 +4,22 @@ from src.Modules.PromptBuilder import call_gpt
 from src.Databases.MJDB import get_database
 from src.Modules.keys import StickerMakerAPIKey as APIKEY
 from src.Modules.Functions import token_cost as tc
+import argparse
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('--ask', type=int, help='Number of times to run')
+args = parser.parse_args()
+ask = args.ask
 
 #connect to MJ-DB
 dbname = get_database()
 collection_name = dbname["MJ_prompts"]
 
-#zeroize counts and ask for number of iterations
+#zeroize counts
 run = 0
 retry = 0
 total_cost = 0
-ask = input("How many times would you like to run: ")
 
 #The Loop
 while run < int(ask) and retry < 10:

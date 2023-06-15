@@ -12,8 +12,8 @@ body {
     padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     background-color: #1F1F1F;
     border-radius: 5px;
 }
@@ -26,4 +26,54 @@ body {
     padding: 20px;
     background-color: #2C2C2C;
     color: #FFFFFF;
+}
+
+.listcard {
+    border-radius: 5px;
+    align-items: left;
+    box-shadow: 0 5px 15px rgba(0,150,0,1);
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #F2F2F2;
+    color: #FFFFFF;
+}
+
+a:link {
+    color: #0094DE;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #FF11FF;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #DD127B;
+}
+
+.container {
+    display: flex;
+}
+
+.viewer {
+    flex: 1;
+    padding: 20px;
+}
+
+.buckets {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bucket {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    text-align: center;
+    line-height: 200px;
+    margin-bottom: 20px;
 }
