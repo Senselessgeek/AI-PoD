@@ -33,8 +33,14 @@ def mj_to_mongo():
     return render_template('MJ_to_mongo.html')
 
 
+@app.route('/upscaler')
 def upscale():
     return render_template('upscaler.html')
+
+
+@app.route('/upload_to_pod')
+def upload_to_pod():
+    return render_template('upload_to_pod.html')
 
 
 @app.route('/run_script', methods=['POST'])
@@ -44,7 +50,10 @@ def run_script():
 
     if script_name == 'midjourney_automator':
         try:
-            subprocess.run(['python', 'Apps/midjourney_automator.py'], check=True)
+            result = subprocess.run(['python', 'Apps/midjourney_automator.py'], check=True)
+            print('stdout:', result.stdout)
+            print('stderr:', result.stderr)
+            print('Exit status:', result.returncode)
         except subprocess.CalledProcessError as e:
             print(f"Script failed with exit code: {e.returncode}")
             print(f"Output: {e.output}")
@@ -59,7 +68,8 @@ def run_script():
 
     elif script_name == 'upscaler':
         try:
-            subprocess.run(['python', 'Apps/upscaler.py'], check=True)
+            chain_path, outpath, bucket = request.form['chain_info'].split(",")
+            subprocess.run(['python', 'Apps/upscaler.py', '--chain_path', chain_path, '--outpath', outpath, "--bucket", bucket], check=True)
         except subprocess.CalledProcessError as e:
             print(f"Script failed with exit code: {e.returncode}")
             print(f"Output: {e.output}")

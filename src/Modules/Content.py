@@ -2,7 +2,7 @@ import src.Modules.Prompt_lists as P
 import random
 
 def material ():
-    selected_material = random.choice(P.materials_list)
+    selected_material = list(map(str, random.choice(P.materials_list).split("~")))
     return selected_material
 
 def shape ():
@@ -14,5 +14,5 @@ def color ():
     return selected_color
 
 def medium ():
-    selected_medium = random.choice(P.medium_list)
+    selected_medium = list(map(str, random.choice(P.medium_list).split("~")))
     return selected_medium

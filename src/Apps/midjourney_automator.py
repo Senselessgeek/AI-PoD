@@ -8,7 +8,7 @@ import re
 import requests
 import time
 import uuid
-
+print("from flask")
 # Set OpenAI API key.
 openai.api_key = keys.AIPoDkey
 
@@ -37,10 +37,11 @@ def select_upscale_option(page, option_text):
 
 
 # Save the images
-def download_upscaled_images(page, prompt_text):
+def download_upscaled_images(page, name):
     # Wait for all four images to complete rendering by checking the contents of the last 4 messages to see if it
     # contains the phrase 'Make Variations', and 'Web'.
-
+    name = name
+    print("inside download_upscale_options", name)
     #Create a list of all the messages
     messages = page.query_selector_all(".messageListItem-ZZ7v6g")
     last_four_messages = messages[-4:]
@@ -64,7 +65,7 @@ def download_upscaled_images(page, prompt_text):
                     src = image.get_attribute('href')
                     url = src
                     # Remove all special characters from the response using regex.
-                    response = re.sub(r'[^a-zA-Z0-9\s]', '', prompt_text)
+                    response = re.sub(r'[^a-zA-Z0-9\s]', '', str(name))
                     # Replace all commas and spaces with underscores.
                     response = response.replace(',', '_').replace(' ', '_')
 
@@ -89,7 +90,7 @@ def download_upscaled_images(page, prompt_text):
         print(f"File path: {filepath}")
     else:
         # Call the function again.
-        download_upscaled_images(page, prompt_text)
+        download_upscaled_images(page, name)
 
 
 # Function to get the last message.
@@ -106,8 +107,10 @@ def get_last_message(page):
 
 
 # Function to wait for page to fully load and select all upscale options.
-def wait_and_select_upscale_options(page, prompt_text):
+def wait_and_select_upscale_options(page, prompt_text, name):
     prompt_text = prompt_text.lower()
+    name = name
+    print("inside wait_and_select_upscale_options", name)
     try:
         last_message = get_last_message(page)
         # Check to see if string contains the 'U1'.
@@ -129,19 +132,21 @@ def wait_and_select_upscale_options(page, prompt_text):
                 time.sleep(random.randint(3, 5))
             except Exception as e:
                 print("An error occured while selecting upscale options:", e)
-            download_upscaled_images(page, prompt_text)
+            download_upscaled_images(page, name)
         else:
             print("Photos not fully loaded. Waiting 10 seconds.")
             time.sleep(10)
-            wait_and_select_upscale_options(page, prompt_text)
+            wait_and_select_upscale_options(page, prompt_text, name)
     except Exception as e:
         print("An error occurred while finding the last message:", e)
 
 
 # Function to generate prompt and sumbit command.
-def generate_prompt_and_submit_command(page, prompt):
+def generate_prompt_and_submit_command(page, prompt, name):
     try:
         # Generate prompt.
+        name = name
+        print("inside generate prompt and submit command", name)
         prompt_text = prompt
         time.sleep(random.randint(2, 5))
         pill_value = page.locator(
@@ -152,7 +157,7 @@ def generate_prompt_and_submit_command(page, prompt):
         # Press the Enter key.
         page.keyboard.press("Enter")
         print(f'Successfully submitted prompt: {prompt_text}')
-        wait_and_select_upscale_options(page, prompt_text)
+        wait_and_select_upscale_options(page, prompt_text, name)
     except Exception as e:
         print("An error occurred while submitting the prompt:", e)
 
@@ -177,8 +182,14 @@ def bot_command(page, command):
         print("Grab random sample from database.")
         for sample in collection_name.aggregate([{"$sample": {"size": 1}}]):
             prompt = sample["prompt"]
-            db_item_id = sample["id"]
-        generate_prompt_and_submit_command(page, prompt)
+            material = sample["material"]
+            shape = sample["shape"]
+            colors = sample["colors"]
+            medium = sample["medium"]
+            name = [material, shape, colors, medium]
+            print("inside bot command", prompt)
+            print("inside bot command", name)
+        generate_prompt_and_submit_command(page, prompt, name)
     except Exception as e:
         print("An error occurred while entering in the prompt:", e)
 
@@ -186,6 +197,7 @@ def bot_command(page, command):
 # Main function to log in to Discord and run the bot.
 if __name__ == "__main__":
     with sync_playwright() as p:
+        print("starting from with sync")
         browser = p.chromium.launch(headless=False)
         # Create a new incognito browser context.
         page = browser.new_page()
