@@ -7,18 +7,18 @@
 <script>
     function handleDrop(event) {
         event.preventDefault();
-        var file = event.dataTransfer.files[0];
-        var bucket = event.target.id;
-        var formData = new FormData();
+        let file = event.dataTransfer.files[0];
+        let bucket = event.target.id;
+        let formData = new FormData();
         formData.append('file', file);
         formData.append('bucket', bucket);
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('POST', '/movefile');
         xhr.send(formData);
 
         xhr.onload = function() {
-            var msg = document.createElement("div");
+            let msg = document.createElement("div");
             if (xhr.status === 200) {
                 msg.innerHTML = xhr.responseText;
             } else {
@@ -30,7 +30,7 @@
             msg.style.left = "10px"; // position it 10px from the left of the page
             msg.style.padding = "10px";
             msg.style.backgroundColor = "black"; // make it black so it's visible on any background
-            msg.style.color = "white"; // make the text white so it's visible on the black background
+            msg.style.color = "white"; // make the text white, so it's visible on the black background
             document.body.appendChild(msg);
 
             setTimeout(function() {
@@ -48,22 +48,38 @@
 </head>
 <body>
     <h1>Drag and Drop Image</h1>
+
     <div class="container">
-        <div class="viewer" ondragstart="event.dataTransfer.setData('text/plain', null)" ondragover="handleDragOver(event)">
+        <div class="listcard">
+            <ul>
+                <li class="listcard"><a href="/">Home</a></li>
+                <li class="listcard"><a href="/MJ_to_mongo">MJ to Mongo</a></li>
+                <li class="listcard"><a href="/midjourney_automator">Midjourney Automator</a></li>
+                <li class="listcard"><a href="/sorter">Sorter</a></li>
+                <li class="listcard"><a href="/upscaler">Upscaler</a></li>
+                <li class="listcard"><a href="/upload_to_pod">PoD Uploader</a></li>
+            </ul>
+        </div>
+        <div class="buckets" ondragstart="event.dataTransfer.setData('text/plain', null)" ondragover="handleDragOver(event)">
             {% if random_image is not none %}
                 <img src="{{ url_for('static', filename='images/' + random_image) }}" draggable="true" style="max-width: 100%; max-height: 100%;" />
             {% else %}
                 <img src="{{ url_for('static', filename='no_more_images.png') }}" draggable="false" style="max-width: 100%; max-height: 100%;" />
             {% endif %}
         </div>
-
-        <div class="bucket">
+        <div class="buckets">
             {% for bucket_name in bucket_names %}
                 <div id="{{ bucket_name }}" class="bucket" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
                     {{ bucket_name }}
                 </div>
             {% endfor %}
         </div>
+    </div>
+    <div class="card">
+        <form action="/run_script" method="post">
+            <p>Run me when your done.</p>
+            <button type="submit" name="script" value="Cleanup_images_folder">Cleanup_images_folder</button>
+        </form>
     </div>
 </body>
 </html>

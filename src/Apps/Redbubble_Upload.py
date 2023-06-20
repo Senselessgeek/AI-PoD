@@ -1,64 +1,105 @@
-pip install selenium
-pip install chromedriver-autoinstaller
-from src.Modules.keys import redbubble_pass as username
+from playwright.sync_api import sync_playwright
+from src.Modules.keys import redbubble_user as username
 from src.Modules.keys import redbubble_pass as password
 import os
-
-from selenium import webdriver
-import chromedriver_autoinstaller
 import time
 import glob
+import random
 
-images_dir = os.path.join("static", "images", "Redbubble", "Upscaled8192x8192")
+
+print(os.getcwd())
+images_dir = os.path.join("..", "static", "images", "Redbubble")
 all_images = set(image for image in os.listdir(images_dir)
                  if os.path.isfile(os.path.join(images_dir, image)))
+print(images_dir)
+files = list(all_images)
+print(files)
 design_upload = list(all_images)
+main_page_url = 'https://www.redbubble.com/auth/login'
 base_design_url = 'https://www.redbubble.com/portfolio/images/145963638-abstract-foreboding-paint-dripping/duplicate'
 
-# Check if the current version of chromedriver exists and if it doesn't exist, download it automatically,then add chromedriver to path
-chromedriver_autoinstaller.install()
-# Create new Instance of Chrome
-driver = webdriver.Chrome()
 
-#Open the base design webpage
-driver.get(base_design_url)
-# find username/email field and send the username itself to the input field
-driver.find_element_by_id("ReduxFormInput1").send_keys(username)
-# find password input field and insert password as well
-driver.find_element_by_id("ReduxFormInput2").send_keys(password)
-# click login button
-driver.find_element_by_css_selector(".app-ui-components-Button-Button_button_1_MpP.app-ui-components-Button-Button_primary_pyjm6.app-ui-components-Button-Button_padded_1fH5b").click()
-time.sleep(20)
+with sync_playwright() as p:
+    '''
+    print("starting from with sync")
+    browser = p.chromium.launch(headless=False)
+    # Create a new incognito browser context.
+    page = browser.new_page()
+    # Go to Discord login page.
+    page.goto(main_page_url)
+    print("Entering email")
+    page.fill('id=ReduxFormInput1', username)
+    time.sleep(random.randint(2, 5))
+    print("Entering password")
+    page.click('id=ReduxFormInput2')
+    page.fill('id=ReduxFormInput2', password)
+    time.sleep(random.randint(2,5))
+    page.keyboard.press('Enter')
+    time.sleep(random.randint(5, 10))
+    print("pausing to enter captchas")
+    page.pause()
+    '''
 
-for i in design_upload:
-    # Take the design name and removing the extension
-    img_name = i.split('.')[0]
-    url_img = '{Your Design Location and the img_name}'
-    title = '{Your design title and the img_name}'
-    tags = '{Your intended Tags}'
-    desc = '{Your design description and the img_name}'
-    driver.get(base_design_url)
-    time.sleep(1)
-    # Filling the title form
-    element = driver.find_element_by_id('work_title_en')
-    element.clear()
-    element.send_keys(title)
-    # Filling the tag form
-    element = driver.find_element_by_id('work_tag_field_en')
-    element.clear()
-    element.send_keys(tags)
-    # Filling the description form
-    element = driver.find_element_by_id('work_description_en')
-    element.clear()
-    element.send_keys(desc)
-    # Upload the image design
-    driver.find_element_by_id('select-image single').send_keys(url_img)
-    # Click the Declaration form
-    driver.find_element_by_id('rightsDeclaration').click()
-    # Let the design upload process finished
-    time.sleep(30)
-    # Submit the work
-    driver.find_element_by_id('submit-work').click()
+    for i in design_upload:
+        # Take the design name and removing the extension
+        img_name = i.split('.')[0]
+        print(i)
 
-    # Let the whole process finish before move on to the next design
-    time.sleep(30)
+        url_img = os.path.join(images_dir, i)
+        print(url_img)
+        title = '{Your design title and the img_name}'
+        print(title)
+        tags = '{Your intended Tags}'
+        print(tags)
+        desc = '{Your design description and the img_name}'
+        print(desc)
+
+
+        page.goto(base_design_url)
+        time.sleep(random.randint(2,5))
+
+        '''
+        # Filling the title form
+        element = driver.find_element_by_id('work_title_en')
+        element.clear()
+        element.send_keys(title)
+        '''
+
+        '''
+        # Filling the tag form
+        element = driver.find_element_by_id('work_tag_field_en')
+        element.clear()
+        element.send_keys(tags)
+        '''
+
+        '''
+        # Filling the description form
+        element = driver.find_element_by_id('work_description_en')
+        element.clear()
+        element.send_keys(desc)
+        '''
+
+        '''
+        # Upload the image design
+        driver.find_element_by_id('select-image single').send_keys(url_img)
+        '''
+
+        '''
+        # Click the Declaration form
+        driver.find_element_by_id('rightsDeclaration').click()
+        '''
+
+        '''
+        # Let the design upload process finished
+        time.sleep(30)
+        '''
+
+        '''
+        # Submit the work
+        driver.find_element_by_id('submit-work').click()
+        '''
+
+        '''
+        # Let the whole process finish before move on to the next design
+        time.sleep(30)
+        '''

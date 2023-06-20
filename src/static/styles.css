@@ -11,12 +11,12 @@ body {
     margin: 0 auto;
     padding: 40px;
     display: flex;
-    flex-direction: column;
     justify-content: left;
     align-items: left;
     background-color: #1F1F1F;
     border-radius: 5px;
 }
+
 
 .card {
     border-radius: 5px;
@@ -38,6 +38,32 @@ body {
     color: #FFFFFF;
 }
 
+
+.viewer {
+    display: inline-block;
+    flex: 1;
+    padding: 20px;
+}
+
+.buckets {
+    float:  right;
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bucket {
+    display: inline-block;
+    float: right;
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    text-align: center;
+    line-height: 200px;
+    margin-bottom: 20px;
+}
+
 a:link {
     color: #0094DE;
     text-decoration: none;
@@ -51,29 +77,4 @@ a:visited {
 a:hover {
     text-decoration: underline;
     color: #DD127B;
-}
-
-.container {
-    display: flex;
-}
-
-.viewer {
-    flex: 1;
-    padding: 20px;
-}
-
-.buckets {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.bucket {
-    width: 200px;
-    height: 200px;
-    border: 2px dashed #ccc;
-    text-align: center;
-    line-height: 200px;
-    margin-bottom: 20px;
 }

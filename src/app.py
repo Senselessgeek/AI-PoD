@@ -50,7 +50,8 @@ def run_script():
 
     if script_name == 'midjourney_automator':
         try:
-            result = subprocess.run(['python', 'Apps/midjourney_automator.py'], check=True)
+            ask_value = request.form['ask']
+            result = subprocess.run(['python', 'Apps/midjourney_automator.py', '--ask', ask_value], check=True)
             print('stdout:', result.stdout)
             print('stderr:', result.stderr)
             print('Exit status:', result.returncode)
@@ -70,6 +71,16 @@ def run_script():
         try:
             chain_path, outpath, bucket = request.form['chain_info'].split(",")
             subprocess.run(['python', 'Apps/upscaler.py', '--chain_path', chain_path, '--outpath', outpath, "--bucket", bucket], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Script failed with exit code: {e.returncode}")
+            print(f"Output: {e.output}")
+
+    elif script_name == 'Cleanup_images_folder':
+        try:
+            result = subprocess.run(['python', 'Apps/Cleanup_images_folder.py'], check=True)
+            print('stdout:', result.stdout)
+            print('stderr:', result.stderr)
+            print('Exit status:', result.returncode)
         except subprocess.CalledProcessError as e:
             print(f"Script failed with exit code: {e.returncode}")
             print(f"Output: {e.output}")
@@ -110,7 +121,9 @@ def movefile():
     file = request.files['file']
     bucket = request.form['bucket']
 
-    if file and bucket in bucket_names:
+    if file == "no_more_images.png":
+        return 'No More Images.'
+    elif file and bucket in bucket_names:
         filename = file.filename
         # Set MOVE_FOLDER dynamically
         move_folder = os.path.join(base_move_folder, bucket)
@@ -118,9 +131,9 @@ def movefile():
         os.makedirs(move_folder, exist_ok=True)
         file_path = os.path.join(move_folder, filename)
         file.save(file_path)
+        subprocess.run(['python', 'Apps/Update_mongo.py', '--bucket', bucket, '--filename', filename], check=True)
         return 'Image moved successfully!'
     return 'Image upload failed!'
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
