@@ -9,9 +9,14 @@ parser.add_argument('--chain_path')
 parser.add_argument('--outpath')
 parser.add_argument('--bucket')
 args = parser.parse_args()
-chain_path = os.path.join(os.getcwd(),"static", "8192.chn")
+
 outpath = args.outpath
 bucket = args.bucket
+if args.bucket == "Redbubble_Upload":
+    chain_path = os.path.join(os.getcwd(),"static", "8192Redbubble.chn")
+else:
+    chain_path = os.path.join(os.getcwd(),"static", "8192StockPhoto.chn")
+
 chainner_path = "C:\\Users\\andmarst\\AppData\\Local\\chainner\\app-0.18.9"
 
 

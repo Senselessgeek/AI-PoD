@@ -46,6 +46,7 @@ body {
 }
 
 .buckets {
+grid-column: 1 / span 2;
     float:  right;
     flex: 1;
     padding: 20px;
@@ -77,4 +78,36 @@ a:visited {
 a:hover {
     text-decoration: underline;
     color: #DD127B;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container-1col {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+    max-width: 30%;
+}
+
+.grid-container > div {
+  background-color: rgba(50, 0, 50, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+.grid-item pre{
+    margin:0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.item1 {
+  grid-column: 1 ;
 }

@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <title>Upload to PoD</title>
+    <title>Drag and Drop</title>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h2>Upload to PoD sites</h2>
-        </div>
-    </div>
+    <h1>Drag and Drop Image</h1>
+
     <div class="container">
         <div class="listcard">
             <ul>
@@ -20,13 +15,14 @@
                 <li class="listcard"><a href="/midjourney_automator">Midjourney Automator</a></li>
                 <li class="listcard"><a href="/sorter">Sorter</a></li>
                 <li class="listcard"><a href="/upscaler">Upscaler</a></li>
-                <li class="listcard"><a href="/upload_to_pod">PoD Uploader</a></li>
+                <li class="listcard"><a href="/Redbubble_Upload">Redbubble Upload</a></li>
             </ul>
         </div>
-        <div class="listcard">
-            <form action="/run_script" method="post">
-                <button type="submit" name="script" value="Redbubble_Upload">Upload to Redbubble</button>
-            </form>
+        <div>
+          <form action="/movefilewithoutmongo" method="post">
+            <input type="text" name="ask" placeholder="What file are you wanting to move: " required>
+            <button type="submit" name="script" value="movefilewithoutmongo">Move the File</button>
+          </form>
         </div>
     </div>
 </body>

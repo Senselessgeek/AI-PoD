@@ -22,7 +22,7 @@ args = parser.parse_args()
 ask = args.ask
 
 # Set OpenAI API key.
-openai.api_key = keys.AIPoDkey
+openai.api_key = keys.AIPODKEY
 
 #connect to MJ-DB
 dbname = get_database()
@@ -157,6 +157,7 @@ def wait_and_select_upscale_options(page, prompt_text, name):
                 time.sleep(random.randint(2, 4))
             except Exception as e:
                 print(f"{Fore.LIGHTYELLOW_EX}{curfile}{Style.RESET_ALL} An error occured while selecting upscale options:", e)
+            time.sleep(5)
             download_upscaled_images(page, name)
         else:
             print(f"{Fore.LIGHTYELLOW_EX}{curfile}{Style.RESET_ALL} Photos not fully loaded. Waiting 5 seconds.")

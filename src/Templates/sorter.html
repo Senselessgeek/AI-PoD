@@ -14,7 +14,12 @@
         formData.append('bucket', bucket);
 
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', '/movefile');
+        if (['Good', 'Bad', 'Maybe'].includes(bucket)){
+            xhr.open('POST', '/movestockphoto');
+        } else {
+            xhr.open('POST', '/movefile');
+        }
+
         xhr.send(formData);
 
         xhr.onload = function() {
@@ -57,20 +62,39 @@
                 <li class="listcard"><a href="/midjourney_automator">Midjourney Automator</a></li>
                 <li class="listcard"><a href="/sorter">Sorter</a></li>
                 <li class="listcard"><a href="/upscaler">Upscaler</a></li>
-                <li class="listcard"><a href="/upload_to_pod">PoD Uploader</a></li>
+                <li class="listcard"><a href="/Redbubble_Upload">Redbubble Upload</a></li>
             </ul>
         </div>
         <div class="buckets" ondragstart="event.dataTransfer.setData('text/plain', null)" ondragover="handleDragOver(event)">
             {% if random_image is not none %}
+                <p>{{count}}</p>
                 <img src="{{ url_for('static', filename='images/' + random_image) }}" draggable="true" style="max-width: 100%; max-height: 100%;" />
             {% else %}
                 <img src="{{ url_for('static', filename='no_more_images.png') }}" draggable="false" style="max-width: 100%; max-height: 100%;" />
             {% endif %}
         </div>
-        <div class="buckets">
+        <div class="grid-container">
             {% for bucket_name in bucket_names %}
-                <div id="{{ bucket_name }}" class="bucket" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                <div id="{{ bucket_name }}" class="grid-container > div" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
                     {{ bucket_name }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="buckets" ondragstart="event.dataTransfer.setData('text/plain', null)" ondragover="handleDragOver(event)">
+            {% if random_image is not none %}
+                <p>{{stock_image_count}}</p>
+                <img src="{{ url_for('static', filename='images/StockPhoto_Upload/' + stock_random_image) }}" draggable="true" style="max-width: 70%; max-height: 100%;" />
+            {% else %}
+                <p>No More Images></p>
+                <img src="{{ url_for('static', filename='no_more_images.png') }}" draggable="false" style="max-width: 100%; max-height: 100%;" />
+            {% endif %}
+        </div>
+        <div class="grid-container" style="width: 500px">
+            {% for stock_bucket_name in stock_buckets %}
+                <div id="{{ stock_bucket_name }}" class="grid-container > div" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                    {{ stock_bucket_name }}
                 </div>
             {% endfor %}
         </div>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <title>Upload to PoD</title>
+    <script>
+        function copyToClipboard(elementId) {
+          /* Get the text field */
+          var copyText = document.getElementById(elementId);
+
+           /* Copy the text inside the text field */
+          navigator.clipboard.writeText(copyText.innerText)
+            .then(() => {
+              console.log('Text copied to clipboard');
+            })
+            .catch(err => {
+              // This can happen if the user denies clipboard permissions:
+              console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Upload to PoD sites</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="listcard">
+            <ul>
+                <li class="listcard"><a href="/">Home</a></li>
+                <li class="listcard"><a href="/MJ_to_mongo">MJ to Mongo</a></li>
+                <li class="listcard"><a href="/midjourney_automator">Midjourney Automator</a></li>
+                <li class="listcard"><a href="/sorter">Sorter</a></li>
+                <li class="listcard"><a href="/upscaler">Upscaler</a></li>
+                <li class="listcard"><a href="/Redbubble_Upload">Redbubble Upload</a></li>
+            </ul>
+        </div>
+        <div class="buckets" ondragstart="event.dataTransfer.setData('text/plain', null)" ondragover="handleDragOver(event)">
+            {% if random_image is not none %}
+                <img src="{{ url_for('static', filename='images/Redbubble_Upscaled8192x8192/' + random_image) }}" draggable="true" style="max-width: 100%; max-height: 100%;" />
+            {% else %}
+                <p> No Images To Upload</p>
+                <img src="{{ url_for('static', filename='no_more_images.png') }}" draggable="false" style="max-width: 100%; max-height: 100%;" />
+            {% endif %}
+        </div>
+        <div class="grid-container-1col">
+
+            <div class="grid-item">
+                {% if random_image is not none %}
+                    <p>IMAGE</p>
+                    <pre id="preRandomImage">{{random_image}}</pre>
+                    <button onclick="copyToClipboard('preRandomImage')">Copy</button>
+                {% else %}
+                    <p>IMAGE</p>
+                    <p>Empty</p>
+                {% endif %}
+            </div>
+            <div class="grid-item">
+                {% if title is not none %}
+                    <p>TITLE</p>
+                    <pre id="preTitle">{{title}}</pre>
+                    <button onclick="copyToClipboard('preTitle')">Copy</button>
+                {% else %}
+                    <p>TITLE</p>
+                    <p>Empty</p>
+                {% endif %}
+            </div>
+            <div class="grid-item">
+                {% if tags is not none %}
+                    <p>TAGS</p>
+                    <pre id="preTags">{{tags}}, senselessgeek</pre>
+                    <button onclick="copyToClipboard('preTags')">Copy</button>
+                {% else %}
+                    <p>DESCRIPTION</p>
+                    <p>Empty</p>
+                {% endif %}
+            </div>
+            <div class="grid-item">
+                {% if desc is not none %}
+                    <p>DESCRIPTION</p>
+                    <pre id="preDesc">{{desc}}</pre>
+                    <button onclick="copyToClipboard('preDesc')">Copy</button>
+                {% else %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div>
+          <form action="/movefilewithoutmongo" method="post">
+            <input type="text" name="ask" placeholder="{{random_image}}" value="{{random_image}}">
+            <button type="submit" name="script" value="movefilewithoutmongo">Move the File</button>
+          </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
-from bson import ObjectId
 from src.Databases.MJDB import get_database
 from pymongo.errors import PyMongoError
 import argparse
+from src.Modules.Functions import oid_from_filename as oid
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser()
@@ -18,13 +18,8 @@ filename = args.filename
 dbname = get_database()
 collection_name = dbname["MJ_prompts"]
 
-object_value = filename.split("_")
-print(object_value)
-mongo_id_hex = object_value[0].lstrip("ObjectId")
-print(mongo_id_hex)
-mongo_id = ObjectId(mongo_id_hex)
-print(mongo_id)
 
+mongo_id = oid(filename)
 item = collection_name.find({"_id": mongo_id})
 
 
