@@ -16,3 +16,7 @@ def color ():
 def medium ():
     selected_medium = list(map(str, random.choice(P.medium_list).split("~")))
     return selected_medium
+
+def style ():
+    selected_style = list(map(str, random.choice(P.style_list).split("~")))
+    return selected_style

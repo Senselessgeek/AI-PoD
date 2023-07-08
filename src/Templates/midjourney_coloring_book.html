@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <title>Main Page</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Midjourney Automator</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="listcard">
+            <ul>
+                <li class="listcard"><a href="/">Home</a></li>
+                <li class="listcard"><a href="/MJ_to_mongo">MJ to Mongo</a></li>
+                <li class="listcard"><a href="/midjourney_automator">Midjourney Automator</a></li>
+                <li class="listcard"><a href="/sorter">Sorter</a></li>
+                <li class="listcard"><a href="/upscaler">Upscaler</a></li>
+                <li class="listcard"><a href="/Redbubble_Upload">Redbubble Upload</a></li>
+            </ul>
+        </div>
+        <div class="card">
+            <form action="/run_script" method="post">
+                <input type="number" name="ask" placeholder="How many times would you like to run this: " required>
+                <button type="submit" name="script" value="midjourney_automator">Run Midjourney Automater</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+</body>
+</html>
